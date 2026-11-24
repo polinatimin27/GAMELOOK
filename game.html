@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEAD FILES — Палата №13</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="story-body">
+
+<main id="prologue" class="prologue">
+
+    <p class="story-date">24 НОЯБРЯ 2026 ГОДА</p>
+
+    <p class="story-line line1">
+        Последние семь лет клиника «Элизиум»
+        работала вдали от общественного внимания.
+    </p>
+
+    <p class="story-line line2">
+        Никаких скандалов.
+        Никаких расследований.
+        Никаких вопросов.
+    </p>
+
+    <p class="story-line line3">
+        По крайней мере, так было до сегодняшней ночи.
+    </p>
+
+    <button class="story-next" onclick="showOffice()">
+        Продолжить
+    </button>
+
+</main>
+
+<main id="office" class="prologue" hidden>
+
+    <p class="story-date">
+        23:47 | КАБИНЕТ ДЕТЕКТИВА
+    </p>
+
+    <p class="office-text">
+        За окном идёт дождь. Рабочий день давно закончился.
+    </p>
+
+    <p class="office-text">
+        Собираясь уходить, вы замечаете на столе
+        конверт без обратного адреса.
+    </p>
+
+    <p class="office-text">
+        Вы не знаете, кто его оставил.
+    </p>
+
+    <button onclick="openLetter()">
+        Открыть конверт
+    </button>
+
+</main>
+
+<main id="letterScreen" class="intro" hidden>
+
+    <div class="letter">
+
+        <p>Добрый вечер.</p>
+
+        <p>
+            Не знаю, сможете ли вы мне помочь,
+            но больше обратиться не к кому.
+        </p>
+
+        <p>
+            В ноябре 2019 года в клинике «Элизиум»
+            произошло кое-что, о чём до сих пор
+            никто не знает.
+        </p>
+
+        <p>
+            Найдите документы пациента №013.
+            Начните с них.
+        </p>
+
+        <p>
+            Пожалуйста, не сообщайте персоналу
+            об этом письме.
+        </p>
+
+    </div>
+
+    <button onclick="acceptCase()">
+        Отправиться в клинику
+    </button>
+
+    <a class="back" href="index.html">
+        Вернуться в меню
+    </a>
+
+</main>
+
+<section id="walkingScene" hidden>
+
+    <div class="walking-image"></div>
+
+    <p class="walking-text">00:24</p>
+
+</section>
+
+<section id="clinicScene" hidden>
+
+    <div class="clinic-image"></div>
+
+    <div class="clinic-content">
+
+        <p>00:26</p>
+
+        <h2>Клиника «Элизиум»</h2>
+
+        <button onclick="enterClinic()">
+            Войти
+        </button>
+
+    </div>
+
+</section>
+
+<script src="index.js"></script>
+<section id="receptionScene" hidden>
+
+    <div id="nurseImage" class="nurse-image"></div>
+
+    <div class="dialogue" id="dialogueBox" hidden>
+
+        <p class="character-name">Медсестра</p>
+
+        <p id="dialogueText">
+            Добрый вечер. Вы что-то хотели?
+        </p>
+
+        <div id="dialogueChoices">
+
+            <button onclick="nurseAnswer(1)">
+                Я хотел бы поговорить с врачом.
+            </button>
+
+            <button onclick="nurseAnswer(2)">
+                Мне нужна информация об одном пациенте.
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
