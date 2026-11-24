@@ -8,6 +8,8 @@
 </head>
 <body class="story-body">
 
+<!-- Предыстория -->
+
 <main id="prologue" class="prologue">
 
     <p class="story-date">24 НОЯБРЯ 2026 ГОДА</p>
@@ -33,6 +35,8 @@
 
 </main>
 
+<!-- Кабинет детектива -->
+
 <main id="office" class="prologue" hidden>
 
     <p class="story-date">
@@ -57,6 +61,8 @@
     </button>
 
 </main>
+
+<!-- Анонимное письмо -->
 
 <main id="letterScreen" class="intro" hidden>
 
@@ -97,6 +103,8 @@
 
 </main>
 
+<!-- Дорога -->
+
 <section id="walkingScene" hidden>
 
     <div class="walking-image"></div>
@@ -104,6 +112,8 @@
     <p class="walking-text">00:24</p>
 
 </section>
+
+<!-- Прибытие к клинике -->
 
 <section id="clinicScene" hidden>
 
@@ -123,10 +133,17 @@
 
 </section>
 
-<script src="index.js"></script>
+<!-- Регистратура -->
+
 <section id="receptionScene" hidden>
 
     <div id="nurseImage" class="nurse-image"></div>
+
+    <button id="deskButton"
+            onclick="approachDesk()"
+            aria-label="Осмотреть стойку"
+            hidden>
+    </button>
 
     <div class="dialogue" id="dialogueBox" hidden>
 
@@ -151,3 +168,174 @@
     </div>
 
 </section>
+
+<!-- Осмотр рабочего стола -->
+
+<section id="inspectionScene" hidden>
+
+    <div class="inspection-room">
+
+        <img src="images/reception.png"
+             class="reception-background"
+             alt="Рабочий стол регистратуры">
+
+        <!-- Бумаги -->
+
+        <button class="desk-object papers"
+                onclick="inspectObject('papers')"
+                aria-label="Бумаги">
+        </button>
+
+        <!-- Пропуск медсестры -->
+
+        <button class="desk-object medical"
+                onclick="inspectObject('medical')"
+                aria-label="Пропуск">
+        </button>
+
+        <!-- Документы -->
+
+        <button class="desk-object documents"
+                onclick="inspectObject('documents')"
+                aria-label="Документы">
+        </button>
+
+        <!-- Календарь -->
+
+        <button class="desk-object calendar"
+                onclick="inspectObject('calendar')"
+                aria-label="Календарь">
+        </button>
+
+        <!-- Телефон -->
+
+        <button class="desk-object phone"
+                onclick="inspectObject('phone')"
+                aria-label="Телефон">
+        </button>
+
+        <!-- Компьютер -->
+
+        <button class="desk-object computer"
+                onclick="inspectObject('computer')"
+                aria-label="Компьютер">
+        </button>
+
+    </div>
+
+    <button class="inspection-back"
+            onclick="showEmptyReception()">
+        Назад
+    </button>
+
+    <!-- Подробный осмотр предмета -->
+
+    <div id="objectWindow" hidden>
+
+        <button class="close-object"
+                onclick="closeObject()"
+                aria-label="Закрыть осмотр">
+            ✕
+        </button>
+
+        <img id="objectPhoto" alt="Осмотр предмета">
+
+        <!-- Мысли детектива -->
+
+        <div id="detectiveThought" hidden>
+
+            <p class="thought-title">
+                МЫСЛИ ДЕТЕКТИВА
+            </p>
+
+            <p id="thoughtText"></p>
+
+            <button id="saveClueButton"
+                    onclick="saveClue()">
+                Записать в дневник
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Кнопка открытия дневника -->
+
+<button id="journalButton"
+        onclick="openJournal()"
+        hidden>
+    📖 Дневник
+</button>
+
+<!-- Личный дневник детектива -->
+
+<section id="journalWindow" hidden>
+
+    <div class="journal-book">
+
+        <img src="images/journal.png"
+             class="journal-background"
+             alt="Личный дневник">
+
+        <!-- Раздел: Улики -->
+
+        <button class="journal-area clues-tab"
+                onclick="showJournalTab('clues')"
+                aria-label="Улики">
+        </button>
+
+        <!-- Раздел: Люди -->
+
+        <button class="journal-area people-tab"
+                onclick="showJournalTab('people')"
+                aria-label="Люди">
+        </button>
+
+        <!-- Раздел: Заметки -->
+
+        <button class="journal-area notes-tab"
+                onclick="showJournalTab('notes')"
+                aria-label="Заметки">
+        </button>
+
+        <!-- Закрытие дневника -->
+
+        <button class="journal-area journal-close"
+                onclick="closeJournal()"
+                aria-label="Закрыть дневник">
+        </button>
+
+        <!-- Записи на правой странице -->
+
+        <div id="journalEntries"></div>
+
+        <!-- Предыдущая страница -->
+
+        <button class="journal-area previous-page"
+                onclick="changeJournalPage(-1)"
+                aria-label="Предыдущая страница">
+        </button>
+
+        <!-- Номер страницы -->
+
+        <span id="journalPageNumber">
+            1 / 1
+        </span>
+
+        <!-- Следующая страница -->
+
+        <button class="journal-area next-page"
+                onclick="changeJournalPage(1)"
+                aria-label="Следующая страница">
+        </button>
+
+    </div>
+
+</section>
+
+<script src="index.js"></script>
+
+</body>
+</html>

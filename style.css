@@ -191,7 +191,7 @@ footer {
             url("images/desk.jpg") center / cover no-repeat;
 }
 
-/* Письмо */
+/* Анонимное письмо */
 
 .intro {
     width: 90%;
@@ -208,16 +208,21 @@ footer {
             #ded3bb,
             #b6a78a
     );
+
     color: #302b24;
     padding: 45px;
     text-align: left;
+
     font-family: "Courier New", monospace;
     font-size: 17px;
     line-height: 1.8;
+
     margin-bottom: 35px;
+
     box-shadow:
             5px 10px 35px #000,
             inset 0 0 40px #9c8c71;
+
     transform: rotate(-1deg);
 }
 
@@ -259,7 +264,10 @@ footer {
 .walking-image {
     position: absolute;
     inset: 0;
-    background: url("images/road.jpg") center / cover no-repeat;
+
+    background:
+            url("images/road.jpg") center / cover no-repeat;
+
     animation: walking 9s linear forwards;
     will-change: transform, opacity;
 }
@@ -269,6 +277,7 @@ footer {
     bottom: 40px;
     width: 100%;
     text-align: center;
+
     color: #aaa;
     letter-spacing: 4px;
     font-size: 13px;
@@ -279,23 +288,28 @@ footer {
 .clinic-image {
     position: absolute;
     inset: 0;
+
     background:
             linear-gradient(
                     transparent 40%,
                     rgba(0, 0, 0, 0.8)
             ),
             url("images/clinic.jpg") center / cover no-repeat;
+
     animation: arrival 5s ease forwards;
 }
 
 .clinic-content {
     position: absolute;
+
     bottom: 8%;
     left: 5%;
     right: 5%;
+
     max-width: 450px;
     margin: auto;
     text-align: center;
+
     animation: storyAppear 2s ease 3s both;
 }
 
@@ -322,27 +336,38 @@ footer {
     inset: 0;
     background: #000;
     overflow: hidden;
+
     animation: dialogueFade 1.5s ease both;
 }
 
 .nurse-image {
     position: absolute;
     inset: 0;
-    background: url("images/nurse1.png") center / cover no-repeat;
+
+    background:
+            url("images/nurse1.png") center / cover no-repeat;
+
     animation: dialogueFade 1.5s ease both;
+
+    z-index: 0;
 }
 
-/* Дополнительный слой для смены фотографии */
+/* Плавная смена фотографий */
 
 .nurse-overlay {
     position: absolute;
     inset: 0;
+
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+
+    transition: opacity 0.4s ease-in-out;
+
     pointer-events: none;
+    z-index: 0;
 }
 
 .nurse-overlay.visible {
@@ -353,14 +378,19 @@ footer {
 
 .dialogue {
     position: absolute;
+
     bottom: 4%;
     left: 50%;
+
     transform: translateX(-50%);
+
     width: 90%;
     max-width: 780px;
+
     padding: 25px 30px;
 
     background: rgba(10, 10, 10, 0.78);
+
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
 
@@ -370,7 +400,10 @@ footer {
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.35);
 
     animation: dialogueFade 0.8s ease both;
+
     transition: opacity 0.4s ease;
+
+    z-index: 2;
 }
 
 .dialogue.changing {
@@ -379,8 +412,10 @@ footer {
 
 .character-name {
     color: #a29a89;
+
     font-size: 11px;
     letter-spacing: 4px;
+
     text-transform: uppercase;
     margin-bottom: 15px;
 }
@@ -398,6 +433,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 5px;
+
     counter-reset: answers;
 }
 
@@ -422,6 +458,7 @@ footer {
     padding: 16px 10px;
 
     animation: dialogueAppear 0.6s ease both;
+
     transition:
             background 0.3s ease,
             color 0.3s ease,
@@ -430,6 +467,7 @@ footer {
 
 #dialogueChoices button::before {
     content: counter(answers, decimal-leading-zero);
+
     color: #827868;
     font-size: 12px;
     flex-shrink: 0;
@@ -437,7 +475,9 @@ footer {
 
 #dialogueChoices button::after {
     content: "›";
+
     margin-left: auto;
+
     color: #827868;
     font-size: 22px;
 }
@@ -458,6 +498,576 @@ footer {
 
 #dialogueChoices button:nth-child(3) {
     animation-delay: 0.3s;
+}
+
+/* Интерактивная стойка */
+
+#deskButton {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 25%;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    z-index: 5;
+    cursor: pointer;
+
+    transition: background 0.3s;
+}
+
+#deskButton:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: none;
+}
+
+#nurseImage {
+    transition: transform 1.2s ease;
+    transform-origin: center 80%;
+}
+
+#nurseImage.approach {
+    transform: scale(1.5);
+}
+
+/* Осмотр рабочего стола */
+
+#inspectionScene {
+    position: fixed;
+    inset: 0;
+
+    background: #080808;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    animation: dialogueFade 0.5s ease;
+}
+
+.inspection-room {
+    position: relative;
+
+    width: min(100vw, 190.4vh);
+    aspect-ratio: 1706 / 896;
+
+    overflow: hidden;
+}
+
+.reception-background {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+}
+
+/* Интерактивные предметы */
+
+.desk-object {
+    position: absolute;
+    display: block;
+
+    margin: 0;
+    padding: 0;
+
+    min-width: 0;
+    min-height: 0;
+
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+
+    background-color: transparent;
+    background-image: url("images/reception.png");
+    background-repeat: no-repeat;
+
+    opacity: 0;
+    cursor: pointer;
+
+    transition:
+            transform 0.2s,
+            opacity 0.2s,
+            filter 0.2s;
+}
+
+.desk-object:hover,
+.desk-object:focus-visible {
+    opacity: 1;
+
+    transform: scale(1.06);
+
+    filter: brightness(1.2);
+
+    z-index: 5;
+
+    background-color: transparent;
+    background-image: url("images/reception.png");
+}
+
+/* Бумаги */
+
+.desk-object.papers {
+    left: 7%;
+    top: 55%;
+    width: 18%;
+    height: 22%;
+}
+
+/* Пропуск медсестры */
+
+.desk-object.medical {
+    left: 22.5%;
+    top: 73%;
+    width: 16%;
+    height: 20%;
+}
+
+/* Документы */
+
+.desk-object.documents {
+    left: 41%;
+    top: 68%;
+    width: 19.5%;
+    height: 24%;
+}
+
+/* Календарь */
+
+.desk-object.calendar {
+    left: 56%;
+    top: 54%;
+    width: 12%;
+    height: 21%;
+}
+
+/* Телефон */
+
+.desk-object.phone {
+    left: 69%;
+    top: 59%;
+    width: 15%;
+    height: 18%;
+}
+
+/* Компьютер */
+
+.desk-object.computer {
+    left: 84%;
+    top: 36%;
+    width: 16%;
+    height: 50%;
+}
+
+/* Подробный осмотр предмета */
+
+#objectWindow {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.95);
+
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 15px;
+
+    padding: 60px 20px 25px;
+
+    overflow-y: auto;
+
+    animation: dialogueFade 0.3s ease;
+}
+
+#objectPhoto {
+    display: block;
+
+    max-width: 90vw;
+    max-height: 60dvh;
+
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+#objectPhoto:last-child {
+    margin-bottom: auto;
+}
+
+.close-object {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    width: 45px;
+    height: 45px;
+
+    padding: 0;
+
+    background: transparent;
+    border: none;
+
+    font-size: 25px;
+
+    z-index: 25;
+}
+
+.close-object:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.inspection-back {
+    position: absolute;
+
+    left: 25px;
+    bottom: 25px;
+
+    width: auto;
+
+    z-index: 10;
+}
+
+/* Кнопка личного дневника */
+
+#journalButton {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    width: auto;
+
+    padding: 12px 18px;
+
+    background: rgba(20, 17, 13, 0.85);
+
+    border: 1px solid #82735d;
+
+    color: #d5c4a5;
+    font-size: 14px;
+
+    z-index: 40;
+}
+
+#journalButton:hover {
+    background: #30271d;
+}
+
+/* Окно раскрытого дневника */
+
+#journalWindow {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.95);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    z-index: 100;
+
+    overflow: hidden;
+
+    animation: dialogueFade 0.4s ease;
+}
+
+/* Изображение дневника */
+
+.journal-book {
+    position: relative;
+
+    width: min(100vw, 177.6dvh);
+
+    aspect-ratio: 1648 / 928;
+
+    container-type: inline-size;
+}
+
+.journal-background {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Невидимые кнопки дневника */
+
+.journal-area {
+    position: absolute;
+
+    padding: 0;
+    margin: 0;
+
+    background: transparent;
+
+    border: none;
+    box-shadow: none;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transition: background 0.2s;
+}
+
+.journal-area:hover,
+.journal-area:focus-visible {
+    background: rgba(70, 40, 10, 0.12);
+
+    border: none;
+    box-shadow: none;
+}
+
+/* Раздел улик */
+
+.clues-tab {
+    left: 7.5%;
+    top: 31%;
+
+    width: 20%;
+    height: 12%;
+}
+
+/* Раздел людей */
+
+.people-tab {
+    left: 9%;
+    top: 44%;
+
+    width: 16.5%;
+    height: 10%;
+}
+
+/* Раздел заметок */
+
+.notes-tab {
+    left: 9%;
+    top: 55%;
+
+    width: 16.5%;
+    height: 10%;
+}
+
+/* Крестик дневника */
+
+.journal-area.journal-close {
+    left: 94%;
+    top: 2%;
+
+    width: 4.5%;
+    height: 8%;
+}
+
+/* Перелистывание страниц */
+
+.previous-page {
+    left: 79%;
+    top: 83%;
+
+    width: 4%;
+    height: 7%;
+}
+
+.next-page {
+    left: 87.5%;
+    top: 83%;
+
+    width: 4%;
+    height: 7%;
+}
+
+/* Номер страницы */
+
+#journalPageNumber {
+    position: absolute;
+
+    left: 82.6%;
+    top: 83.2%;
+
+    width: 5.8%;
+    height: 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #c9a475;
+
+    color: #342518;
+
+    font-family: "Segoe Print", Georgia, cursive;
+    font-size: 1.8cqw;
+    font-style: italic;
+}
+
+/* Правая страница дневника */
+
+#journalEntries {
+    position: absolute;
+
+    left: 54%;
+    top: 7%;
+
+    width: 36%;
+    height: 73%;
+
+    color: #302218;
+
+    font-family: "Segoe Print", Georgia, cursive;
+
+    overflow-y: auto;
+
+    padding: 1%;
+
+    scrollbar-width: thin;
+    scrollbar-color: #927349 transparent;
+}
+
+/* Запись в дневнике */
+
+.journal-entry {
+    animation: dialogueFade 0.4s ease;
+}
+
+.journal-entry h3 {
+    font-size: 2.4cqw;
+    font-weight: normal;
+
+    margin-bottom: 1.5cqw;
+
+    padding-bottom: 0.6cqw;
+
+    border-bottom: 1px solid #796043;
+}
+
+.journal-entry p {
+    font-size: 1.6cqw;
+    line-height: 1.8;
+}
+
+/* Фотография найденной улики */
+
+.journal-entry img {
+    display: block;
+
+    width: 55%;
+    max-height: 18cqw;
+
+    object-fit: contain;
+
+    margin: 1.5cqw auto;
+
+    border: 0.5cqw solid #d8bd93;
+
+    background: #d8bd93;
+
+    box-shadow: 2px 4px 10px #786044;
+
+    transform: rotate(-3deg);
+}
+
+/* Дата записи */
+
+.journal-date {
+    text-align: right;
+
+    font-size: 1.3cqw !important;
+
+    margin-bottom: 1cqw;
+}
+
+/* Пустая страница */
+
+.empty-journal {
+    margin-top: 30%;
+
+    text-align: center;
+
+    font-size: 1.7cqw;
+    font-style: italic;
+
+    opacity: 0.6;
+}
+
+/* Мысли детектива */
+
+#detectiveThought {
+    width: 90%;
+    max-width: 700px;
+
+    padding: 20px;
+
+    margin-bottom: auto;
+
+    flex-shrink: 0;
+
+    background: rgba(20, 17, 13, 0.95);
+
+    border: 1px solid #65543d;
+
+    animation: dialogueFade 0.5s ease;
+}
+
+.thought-title {
+    font-size: 11px;
+
+    color: #998265;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+}
+
+#thoughtText {
+    color: #d5c4a5;
+
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* Запись улики */
+
+#saveClueButton {
+    width: 100%;
+
+    margin-top: 15px;
+
+    border-color: #82735d;
+}
+
+#saveClueButton:hover {
+    background: #30271d;
+}
+
+#saveClueButton:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 /* Анимации */
@@ -658,6 +1268,7 @@ footer {
         width: 94%;
         padding: 18px;
         bottom: 3%;
+
         max-height: 45dvh;
         overflow-y: auto;
     }
@@ -677,6 +1288,75 @@ footer {
         gap: 10px;
         padding: 12px 5px;
     }
+
+    #deskButton {
+        height: 35%;
+    }
+
+    #objectPhoto {
+        max-width: 95vw;
+        max-height: 45dvh;
+    }
+
+    .inspection-back {
+        left: 15px;
+        bottom: 20px;
+        width: auto;
+    }
+
+    .close-object {
+        top: 15px;
+        left: 15px;
+
+        width: 45px;
+        height: 45px;
+    }
+
+    #journalButton {
+        top: 10px;
+        right: 10px;
+
+        width: auto;
+
+        font-size: 12px;
+
+        padding: 10px 14px;
+    }
+
+    .journal-book {
+        width: min(100vw, 177.6dvh);
+    }
+
+    #thoughtText {
+        font-size: 14px;
+    }
+
+    #detectiveThought {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #saveClueButton {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+/* Дневник на вертикальном экране телефона */
+
+@media (max-width: 600px) and (orientation: portrait) {
+
+    #journalWindow {
+        overflow: auto;
+        justify-content: flex-start;
+    }
+
+    .journal-book {
+        width: 800px;
+        min-width: 800px;
+
+        flex-shrink: 0;
+    }
 }
 
 /* Уменьшенное движение */
@@ -688,7 +1368,12 @@ footer {
     .nurse-image,
     #receptionScene,
     .dialogue,
-    #dialogueChoices button {
+    #dialogueChoices button,
+    #inspectionScene,
+    #objectWindow,
+    #journalWindow,
+    .journal-entry,
+    #detectiveThought {
         animation: none;
         transform: none;
     }
@@ -698,7 +1383,9 @@ footer {
     }
 
     .nurse-overlay,
-    .dialogue {
+    .dialogue,
+    #nurseImage,
+    .desk-object {
         transition: none;
     }
 
@@ -708,22 +1395,8 @@ footer {
         opacity: 1;
         visibility: visible;
     }
-}
-.nurse-overlay {
-    transition: opacity 0.4s ease-in-out;
-}
 
-.nurse-image,
-.nurse-overlay {
-    z-index: 0;
-}
-
-.dialogue {
-    z-index: 2;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .nurse-overlay {
-        transition: none;
+    #nurseImage.approach {
+        transform: none;
     }
 }
